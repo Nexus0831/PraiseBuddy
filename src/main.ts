@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import firebase from 'firebase/compat/app';
-import 'firebase/auth';
+import 'firebase/compat/auth';
+import 'firebase/compat/database';
 import './registerServiceWorker';
 import router from './router';
 import store from './store';
@@ -9,6 +10,8 @@ import App from './App.vue';
 
 Vue.config.productionTip = false;
 firebase.initializeApp(config);
+// const database = firebase.database();
+// console.log(database);
 
 new Vue({
   router,
