@@ -1,6 +1,9 @@
 <template>
   <div id="home">
     <div class="said-bar">
+      <div>
+        <img :src="user.photoURL" alt="" class="user-icon">
+      </div>
     </div>
     <div class="task-list">
     </div>
@@ -12,8 +15,15 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { mapState } from 'vuex';
   // @ is an alias to /src
-  @Component({})
+  @Component({
+    computed: {
+      ...mapState([
+        'user',
+      ]),
+    },
+  })
 export default class HomeView extends Vue {}
 </script>
 
@@ -33,6 +43,9 @@ export default class HomeView extends Vue {}
     box-shadow rgb(0 0 0 / 20%) 0px 2px 1px -1px,
       rgb(0 0 0 / 14%) 0px 1px 1px 0px,
       rgb(0 0 0 / 12%) 0px 1px 3px 0px
+
+  .user-icon
+    border-radius 50%
 
   .task-list
     grid-row 1 / 2
