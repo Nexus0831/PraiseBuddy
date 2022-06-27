@@ -6,6 +6,13 @@
       </div>
     </div>
     <div class="task-list">
+      <FAB
+        icon="add"
+        style="color: #FFF"
+        rippleColor="rgba(255, 255, 255, 0.2)"
+        hoverColor="#ab003c"
+        backgroundColor="#f50057"
+      />
     </div>
     <div class="animation-area">
       <h1>ここにアニメーションを表示</h1>
@@ -16,8 +23,12 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { mapState } from 'vuex';
+import FAB from '@/components/FloatingActionButton.vue';
   // @ is an alias to /src
   @Component({
+    components: {
+      FAB,
+    },
     computed: {
       ...mapState([
         'user',
@@ -51,6 +62,7 @@ export default class HomeView extends Vue {}
     grid-row 1 / 2
     grid-column 2 / 3
     z-index 90
+    position relative
 
   .animation-area
     grid-row 1 / 2
