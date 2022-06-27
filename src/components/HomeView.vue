@@ -12,11 +12,22 @@
         rippleColor="rgba(255, 255, 255, 0.2)"
         hoverColor="#ab003c"
         backgroundColor="#f50057"
+        @click-action="dialogOpen"
       />
     </div>
     <div class="animation-area">
       <h1>ここにアニメーションを表示</h1>
     </div>
+    <transition name="fade">
+      <TodoDialogForm
+        v-if="isDialogOpen"
+        :validate="todoCreateFields.validate"
+        @dialog-close="dialogClose"
+        :titleValue="titleValue"
+        :memoValue="memoValue"
+        :termValue="termValue"
+      />
+    </transition>
   </div>
 </template>
 
@@ -24,18 +35,40 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { mapState } from 'vuex';
 import FAB from '@/components/FloatingActionButton.vue';
+import TodoDialogForm from '@/components/TodoDialogForm.vue';
   // @ is an alias to /src
   @Component({
     components: {
       FAB,
+      TodoDialogForm,
     },
     computed: {
       ...mapState([
         'user',
+        'todoCreateFields',
+        'isDialogOpen',
       ]),
     },
   })
-export default class HomeView extends Vue {}
+export default class HomeView extends Vue {
+  titleValue = '';
+
+  memoValue = '';
+
+  termValue = '';
+
+  dialogOpen() {
+    this.titleValue = '';
+    this.memoValue = '';
+    this.termValue = '';
+    this.$store.commit('SET_IS_DIALOG_OPEN', true);
+  }
+
+  dialogClose() {
+    this.$store.commit('SET_IS_DIALOG_OPEN', false);
+    this.$store.dispatch('todoFieldsClear');
+  }
+}
 </script>
 
 <style scoped lang="stylus">
