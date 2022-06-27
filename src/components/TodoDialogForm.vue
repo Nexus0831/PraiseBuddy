@@ -34,16 +34,16 @@
       <div class="button-container">
         <Button
           buttonText="CANCEL"
-          style="color: #FFF"
-          rippleColor="rgba(255, 255, 255, 0.5)"
-          hoverColor="rgba(255, 255, 255, 0.08)"
+          style="color: #424242"
+          rippleColor="rgba(0, 0, 0, 0.5)"
+          hoverColor="rgba(0, 0, 0, 0.08)"
           @click-action="$emit('dialog-close')"
         />
         <Button
           buttonText="SUBMIT"
-          style="color: #e91e63"
-          rippleColor="rgba(233, 30, 99, 0.5)"
-          hoverColor="rgba(233, 30, 99, 0.2)"
+          style="color: #BF4545"
+          rippleColor="rgba(191, 69, 69, 0.5)"
+          hoverColor="rgba(191, 69, 69, 0.2)"
           @click-action="$emit('submit-action')"
         />
       </div>
@@ -113,7 +113,7 @@ export default class CounterDialogForm extends Vue {
       cursor default
     .surface
       /*--- style ---*/
-      background-color #424242
+      background-color #F2CFBB
       max-height: calc(100% - 96px);
       width 80%
       max-width 600px
@@ -138,6 +138,7 @@ export default class CounterDialogForm extends Vue {
       margin 0
       padding 24px 24px 20px
       text-align center
+      color #BF4545
     /*--- end ---*/
     .error
       /*--- style ---*/

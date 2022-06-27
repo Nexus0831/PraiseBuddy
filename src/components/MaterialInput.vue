@@ -90,12 +90,12 @@ export default class MaterialInput extends Vue {
       position absolute
       transform translate(0, 24px) scale(1)
       transform-origin top left
-      color rgba(255, 255, 255, 0.7)
+      color rgba(0, 0, 0, 0.7)
       padding 0
       font-size 1rem
       line-height 1
     .material-input-label.focus
-      color #e91e63
+      color #BF4545
     .material-input-label.float
       transform translate(0, 1.5px) scale(0.75)
       transform-origin top left
@@ -104,7 +104,7 @@ export default class MaterialInput extends Vue {
     .material-field-input
       /*--- style ---*/
       position relative
-      color #fff
+      color #424242
       cursor text
       font-size 1rem
       line-height 1.1875em
@@ -120,7 +120,7 @@ export default class MaterialInput extends Vue {
         content "\00a0"
         position absolute
         transition border-bottom-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms
-        border-bottom 1px solid rgba(255, 255, 255, 0.7)
+        border-bottom 1px solid rgba(0, 0, 0, 0.7)
         pointer-events none
       &:after
         left 0
@@ -130,7 +130,7 @@ export default class MaterialInput extends Vue {
         position absolute
         transform scaleX(0)
         transition transform 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms
-        border-bottom 2px solid #e91e63
+        border-bottom 2px solid #BF4545
         pointer-events none
     .material-field-input.focus
       &:after
