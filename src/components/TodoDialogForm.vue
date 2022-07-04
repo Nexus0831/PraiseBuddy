@@ -26,9 +26,12 @@
       <div class="dialog-form-input">
         <input
           id="todo-term"
+          class="term"
           type="date"
           v-model="term"
           @change="termChangeAction(term)"
+          :min="new Date().toISOString().split('T')[0]"
+          onkeydown="return false"
         >
       </div>
       <div class="button-container">
@@ -191,5 +194,9 @@ export default class CounterDialogForm extends Vue {
       display flex
       align-items center
       justify-content flex-end
-  /*--- end ---*/
+      /*--- end ---*/
+    .term
+      color #BF4545
+      background-color transparent
+      border none
 </style>

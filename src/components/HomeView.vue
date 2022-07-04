@@ -10,8 +10,8 @@
         icon="add"
         style="color: #FFF"
         rippleColor="rgba(255, 255, 255, 0.2)"
-        hoverColor="#ab003c"
-        backgroundColor="#f50057"
+        hoverColor="#8350f2"
+        backgroundColor="#A480F2"
         @click-action="dialogOpen"
       />
     </div>
