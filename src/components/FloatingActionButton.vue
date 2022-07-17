@@ -86,7 +86,7 @@ export default class FloatingActionButton extends Vue {
     justify-content center
     /*--- end *---*/
     /*--- position ---*/
-    position absolute
+    position fixed
     bottom 30px
     right 5px
     /*--- end ---*/

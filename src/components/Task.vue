@@ -1,8 +1,8 @@
 <template>
-  <div id="task">
+  <div class="task">
     <div class="task-checkbox-container">
-      <input type="checkbox" id="task-checkbox" class="task-checkbox" />
-      <label for="task-checkbox"></label>
+      <input type="checkbox" :id="keyNumber"/>
+      <label :for="keyNumber"></label>
     </div>
     <div class="task-detail-container">
       <div class="task-title">
@@ -35,7 +35,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue, Prop } from 'vue-property-decorator';
 import MaterialIcon from '@/components/MaterialIcon.vue';
 
 @Component({
@@ -43,16 +43,19 @@ import MaterialIcon from '@/components/MaterialIcon.vue';
     MaterialIcon,
   },
 })
-export default class Task extends Vue {}
+export default class Task extends Vue {
+  @Prop() private keyNumber!: string;
+}
 </script>
 
 <style lang="stylus" scoped>
-  #task
+  .task
     width 100%
     height 150px
     background-color #F2CFBB
     display grid
     grid-template-columns 60px 1fr
+    border-bottom 1px solid #303030
 
     .task-checkbox-container
       grid-column 1 / 2
@@ -60,23 +63,23 @@ export default class Task extends Vue {}
       align-items center
       justify-content center
 
-      .task-checkbox
+      input[type="checkbox"]
         display none
 
-      .task-checkbox + label
+      input[type="checkbox"] + label
         display block
         position relative
         font 14px/20px 'Open Sans', Arial, sans-serif
-        color #ddd
+        color #fff
         cursor pointer
         -webkit-user-select none
         -moz-user-select none
         -ms-user-select none
 
-      .task-checkbox + label:last-child
+      input[type="checkbox"] + label:last-child
         margin-bottom 0
 
-      .task-checkbox + label:before
+      input[type="checkbox"] + label:before
         content ''
         display block
         width 30px
@@ -87,7 +90,7 @@ export default class Task extends Vue {}
         -webkit-transition all .12s, border-color .08s
         transition all .12s, border-color .08s
 
-      .task-checkbox:checked + label:before
+      input[type="checkbox"]:checked + label:before
         width 12px
         top -5px
         left 5px
@@ -107,7 +110,7 @@ export default class Task extends Vue {}
         display flex
         align-items center
         font-weight 600
-        font-size 24px
+        font-size 20px
         color #303030
 
       .task-term

@@ -6,7 +6,13 @@
       </div>
     </div>
     <div class="task-list">
-      <Task />
+      <Task :keyNumber="1"/>
+      <Task :keyNumber="2"/>
+      <Task :keyNumber="3"/>
+      <Task :keyNumber="4"/>
+      <Task :keyNumber="5"/>
+      <Task :keyNumber="6"/>
+      <Task :keyNumber="7"/>
       <FAB
         icon="add"
         style="color: #FFF"
@@ -99,6 +105,7 @@ export default class HomeView extends Vue {
     grid-column 2 / 3
     z-index 90
     position relative
+    overflow auto
 
   .animation-area
     grid-row 1 / 2
