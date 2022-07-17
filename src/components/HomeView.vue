@@ -6,6 +6,7 @@
       </div>
     </div>
     <div class="task-list">
+      <Task />
       <FAB
         icon="add"
         style="color: #FFF"
@@ -36,11 +37,13 @@ import { Component, Vue } from 'vue-property-decorator';
 import { mapState } from 'vuex';
 import FAB from '@/components/FloatingActionButton.vue';
 import TodoDialogForm from '@/components/TodoDialogForm.vue';
+import Task from '@/components/Task.vue';
   // @ is an alias to /src
   @Component({
     components: {
       FAB,
       TodoDialogForm,
+      Task,
     },
     computed: {
       ...mapState([
@@ -73,7 +76,7 @@ export default class HomeView extends Vue {
 
 <style scoped lang="stylus">
   #home
-    background-color #F2CFBB
+    background-color #FFF
     display grid
     grid-template-rows 1fr
     grid-template-columns 64px 1fr 600px
