@@ -79,20 +79,21 @@ export default class Task extends Vue {}
       .task-checkbox + label:before
         content ''
         display block
-        width 24px
-        height 24px
+        width 30px
+        height 30px
         border-radius 50%
-        border 1px solid #BF4545
+        border 2px solid #303030
         opacity .6
         -webkit-transition all .12s, border-color .08s
         transition all .12s, border-color .08s
 
       .task-checkbox:checked + label:before
-        width 10px
+        width 12px
         top -5px
         left 5px
         border-radius 0
         opacity 1
+        border-color #4CAF50
         border-top-color transparent
         border-left-color transparent
         -webkit-transform rotate(45deg)
