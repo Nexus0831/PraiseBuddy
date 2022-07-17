@@ -1,18 +1,18 @@
 <template>
-  <div class="task">
+  <div class="task" :class="checked ? 'checked-task' : 'non-checked-task'" >
     <div class="task-checkbox-container">
       <input type="checkbox" :id="keyNumber"/>
-      <label :for="keyNumber"></label>
+      <label :for="keyNumber" @click="checkedAction"></label>
     </div>
     <div class="task-detail-container">
-      <div class="task-title">
-        ここにタスクのタイトル
+      <div class="task-title" :class="{'checked-text': checked}">
+        {{ title }}
       </div>
-      <div class="task-term">
-        期限: 2022/7/7
+      <div class="task-term" :class="{'checked-text': checked}">
+        {{ term }}
       </div>
-      <div class="task-body">
-        ここはタスクの詳細概要が表示されます
+      <div class="task-body" :class="{'checked-text': checked}">
+        {{ memo }}
       </div>
       <div class="task-menu">
         <MaterialIcon
@@ -45,17 +45,37 @@ import MaterialIcon from '@/components/MaterialIcon.vue';
 })
 export default class Task extends Vue {
   @Prop() private keyNumber!: string;
+
+  @Prop() private title!: string;
+
+  @Prop() private memo!: string;
+
+  @Prop() private term!: string;
+
+  @Prop() private done!: boolean;
+
+  checked = this.done;
+
+  checkedAction() {
+    this.checked = !this.checked;
+  }
 }
 </script>
 
 <style lang="stylus" scoped>
+  .checked-task
+    background-color #a480f2
+
+  .non-checked-task
+    background-color #F2CFBB
+
   .task
     width 100%
     height 150px
-    background-color #F2CFBB
     display grid
     grid-template-columns 60px 1fr
     border-bottom 1px solid #303030
+    transition all 0.2s
 
     .task-checkbox-container
       grid-column 1 / 2
@@ -127,4 +147,8 @@ export default class Task extends Vue {
         flex-direction row-reverse
         padding-right 16px
         gap 24px
+
+      .checked-text
+        color white
+        text-decoration line-through
 </style>

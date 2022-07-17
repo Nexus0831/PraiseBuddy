@@ -6,13 +6,16 @@
       </div>
     </div>
     <div class="task-list">
-      <Task :keyNumber="1"/>
-      <Task :keyNumber="2"/>
-      <Task :keyNumber="3"/>
-      <Task :keyNumber="4"/>
-      <Task :keyNumber="5"/>
-      <Task :keyNumber="6"/>
-      <Task :keyNumber="7"/>
+      <template v-for="item in tasks">
+        <Task
+          :key="item.key"
+          :keyNumber="item.key"
+          :title="item.title"
+          :memo="item.memo"
+          :term="item.term"
+          :done="item.done"
+        />
+      </template>
       <FAB
         icon="add"
         style="color: #FFF"
@@ -33,6 +36,7 @@
         :titleValue="titleValue"
         :memoValue="memoValue"
         :termValue="termValue"
+        @submit-action="todoSubmit"
       />
     </transition>
   </div>
@@ -40,7 +44,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import { mapState } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import FAB from '@/components/FloatingActionButton.vue';
 import TodoDialogForm from '@/components/TodoDialogForm.vue';
 import Task from '@/components/Task.vue';
@@ -54,8 +58,14 @@ import Task from '@/components/Task.vue';
     computed: {
       ...mapState([
         'user',
+        'tasks',
         'todoCreateFields',
         'isDialogOpen',
+      ]),
+    },
+    methods: {
+      ...mapActions([
+        'todoSubmit',
       ]),
     },
   })
@@ -113,6 +123,6 @@ export default class HomeView extends Vue {
     display flex
     justify-content center
     align-items center
-    background-color #A480F2
+    background-color #ccc
 
 </style>

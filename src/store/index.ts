@@ -12,6 +12,29 @@ export default new Vuex.Store({
     user: {
       uid: '',
     },
+    tasks: [
+      {
+        key: '1',
+        title: 'これはタスク1です',
+        memo: 'これはタスク1の詳細です',
+        term: '2022-07-6',
+        done: false,
+      },
+      {
+        key: '2',
+        title: 'これはタスク2です',
+        memo: 'これはタスク2の詳細です',
+        term: '2022-07-14',
+        done: false,
+      },
+      {
+        key: '3',
+        title: 'これはタスク3です',
+        memo: 'これはタスク3の詳細です',
+        term: '2022-07-20',
+        done: false,
+      },
+    ],
     isSignIn: false,
     isDialogOpen: false,
     todoCreateFields: {
@@ -67,6 +90,27 @@ export default new Vuex.Store({
         // eslint-disable-next-line @typescript-eslint/no-empty-function
         router.push('/', () => {});
       }).catch((error) => { console.log(error); });
+    },
+    todoCreate: (context) => {
+      if (context.state.todoCreateFields.title !== '' && context.state.todoCreateFields.term !== '') {
+        const data = {
+          key: '4',
+          title: context.state.todoCreateFields.title,
+          memo: context.state.todoCreateFields.memo,
+          term: context.state.todoCreateFields.term,
+          done: false,
+        };
+        context.state.tasks.push(data);
+        context.commit('SET_IS_DIALOG_OPEN', false);
+        context.dispatch('todoFieldsClear').then();
+      } else {
+        context.commit('SET_TODO_CREATE_FIELDS_VALIDATE', false);
+      }
+    },
+    todoSubmit: (context) => {
+      if (context.state.todoCreateFields.key === '') {
+        context.dispatch('todoCreate').then();
+      }
     },
   },
   modules: {
