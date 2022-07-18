@@ -109,6 +109,7 @@ export default class HomeView extends Vue {
 
   .user-icon
     border-radius 50%
+    padding 4px
 
   .task-list
     grid-row 1 / 2

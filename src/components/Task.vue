@@ -9,7 +9,7 @@
         {{ title }}
       </div>
       <div class="task-term" :class="{'checked-text': checked}">
-        {{ term }}
+        期限: {{ term }}
       </div>
       <div class="task-body" :class="{'checked-text': checked}">
         {{ memo }}
@@ -74,7 +74,7 @@ export default class Task extends Vue {
     height 150px
     display grid
     grid-template-columns 60px 1fr
-    border-bottom 1px solid #303030
+    border-bottom 1px solid #BF4545
     transition all 0.2s
 
     .task-checkbox-container
@@ -116,7 +116,7 @@ export default class Task extends Vue {
         left 5px
         border-radius 0
         opacity 1
-        border-color #4CAF50
+        border 3px solid #45BF45
         border-top-color transparent
         border-left-color transparent
         -webkit-transform rotate(45deg)
@@ -131,15 +131,15 @@ export default class Task extends Vue {
         align-items center
         font-weight 600
         font-size 20px
-        color #303030
+        color #BF4545
 
       .task-term
         height 20
-        color rgba(0, 0, 0, 0.6)
+        color rgba(191, 69, 69, 1)
 
       .task-body
         height 40px
-        color rgba(0, 0, 0, 0.6)
+        color rgba(191, 69, 69, 1)
 
       .task-menu
         height 35px
@@ -149,6 +149,6 @@ export default class Task extends Vue {
         gap 24px
 
       .checked-text
-        color white
+        color #F2CFBB
         text-decoration line-through
 </style>
