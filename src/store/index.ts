@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import { Task } from '@/interface/interface';
 // import firebase from 'firebase/app';
 import firebase from 'firebase/compat/app';
 import 'firebase/auth';
@@ -12,29 +13,7 @@ export default new Vuex.Store({
     user: {
       uid: '',
     },
-    tasks: [
-      {
-        key: '1',
-        title: 'これはタスク1です',
-        memo: 'これはタスク1の詳細です',
-        term: '2022-07-6',
-        done: false,
-      },
-      {
-        key: '2',
-        title: 'これはタスク2です',
-        memo: 'これはタスク2の詳細です',
-        term: '2022-07-14',
-        done: false,
-      },
-      {
-        key: '3',
-        title: 'これはタスク3です',
-        memo: 'これはタスク3の詳細です',
-        term: '2022-07-20',
-        done: false,
-      },
-    ],
+    tasks: [],
     isSignIn: false,
     isDialogOpen: false,
     todoCreateFields: {
@@ -48,6 +27,9 @@ export default new Vuex.Store({
   mutations: {
     SET_USER: (state, user) => {
       state.user = user;
+    },
+    SET_TASKS: (state, tasks) => {
+      state.tasks = tasks;
     },
     SET_IS_SIGN_IN: (state, isSignIn) => {
       state.isSignIn = isSignIn;
@@ -74,6 +56,27 @@ export default new Vuex.Store({
     // *-- end --*
   },
   actions: {
+    todoRead: (context) => {
+      firebase.database().ref(`/users/${context.state.user.uid}/tasks`)
+        .once('value').then((snapshot) => {
+          const tasks: Record<string, unknown>[] = [];
+
+          snapshot.forEach((item: any) => {
+            tasks.push({
+              key: item.key,
+              title: item.val().title,
+              memo: item.val().memo,
+              term: item.val().term,
+              done: item.val().done,
+            });
+          });
+
+          context.commit('SET_TASKS', tasks);
+        })
+        .catch(() => {
+          context.commit('SET_TASKS', []);
+        });
+    },
     todoFieldsClear: (context) => {
       context.commit('SET_TODO_CREATE_FIELDS_KEY', '');
       context.commit('SET_TODO_CREATE_FIELDS_TITLE', '');
@@ -93,16 +96,19 @@ export default new Vuex.Store({
     },
     todoCreate: (context) => {
       if (context.state.todoCreateFields.title !== '' && context.state.todoCreateFields.term !== '') {
-        const data = {
-          key: '4',
+        const data: Record<string, unknown> = {
           title: context.state.todoCreateFields.title,
           memo: context.state.todoCreateFields.memo,
           term: context.state.todoCreateFields.term,
           done: false,
         };
-        context.state.tasks.push(data);
-        context.commit('SET_IS_DIALOG_OPEN', false);
-        context.dispatch('todoFieldsClear').then();
+
+        firebase.database().ref(`/users/${context.state.user.uid}/tasks`).push().update(data)
+          .then(() => {
+            context.commit('SET_IS_DIALOG_OPEN', false);
+            context.dispatch('todoFieldsClear').then();
+            context.dispatch('todoRead').then();
+          });
       } else {
         context.commit('SET_TODO_CREATE_FIELDS_VALIDATE', false);
       }

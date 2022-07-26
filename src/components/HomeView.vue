@@ -76,6 +76,16 @@ export default class HomeView extends Vue {
 
   termValue = '';
 
+  mounted() {
+    this.$store.dispatch('todoRead').then();
+    this.$store.watch(
+      (state) => state.user.uid,
+      () => {
+        this.$store.dispatch('todoRead').then();
+      },
+    );
+  }
+
   dialogOpen() {
     this.titleValue = '';
     this.memoValue = '';
