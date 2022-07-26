@@ -14,6 +14,7 @@
           :memo="item.memo"
           :term="item.term"
           :done="item.done"
+          @update-action="dialogEditOpen"
         />
       </template>
       <FAB
@@ -84,6 +85,15 @@ export default class HomeView extends Vue {
         this.$store.dispatch('todoRead').then();
       },
     );
+  }
+
+  dialogEditOpen(key: string) {
+    const task = this.$store.getters.getTask(key);
+    this.titleValue = task.title;
+    this.memoValue = task.memo;
+    this.termValue = task.term;
+    this.$store.commit('SET_TODO_CREATE_FIELDS_KEY', key);
+    this.$store.commit('SET_IS_DIALOG_OPEN', true);
   }
 
   dialogOpen() {

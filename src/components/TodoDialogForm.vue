@@ -81,6 +81,12 @@ export default class CounterDialogForm extends Vue {
 
   term = '';
 
+  mounted() {
+    if (this.termValue !== '') {
+      this.term = this.termValue;
+    }
+  }
+
   titleChangeAction(title: string) {
     this.$store.commit('SET_TODO_CREATE_FIELDS_TITLE', title);
   }

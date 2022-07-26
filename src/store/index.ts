@@ -24,6 +24,9 @@ export default new Vuex.Store({
       validate: true,
     },
   },
+  getters: {
+    getTask: (state) => (key: string) => state.tasks.filter((e: any) => e.key === key)[0],
+  },
   mutations: {
     SET_USER: (state, user) => {
       state.user = user;
@@ -113,9 +116,24 @@ export default new Vuex.Store({
         context.commit('SET_TODO_CREATE_FIELDS_VALIDATE', false);
       }
     },
+    todoUpdate: (context, key) => {
+      if (context.state.todoCreateFields.title !== '' && context.state.todoCreateFields.term !== '') {
+        firebase.database().ref(`/users/${context.state.user.uid}/tasks/${key}`).update({
+          title: context.state.todoCreateFields.title,
+          memo: context.state.todoCreateFields.memo,
+          term: context.state.todoCreateFields.term,
+        }).then(() => {
+          context.commit('SET_IS_DIALOG_OPEN', false);
+          context.dispatch('todoFieldsClear').then();
+          context.dispatch('todoRead').then();
+        });
+      }
+    },
     todoSubmit: (context) => {
       if (context.state.todoCreateFields.key === '') {
         context.dispatch('todoCreate').then();
+      } else {
+        context.dispatch('todoUpdate', context.state.todoCreateFields.key).then();
       }
     },
   },

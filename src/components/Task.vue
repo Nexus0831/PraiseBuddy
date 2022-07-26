@@ -21,6 +21,7 @@
           rippleColor="rgba(0, 0, 0, 0.5)"
           hoverColor="rgba(0, 0, 0, 0.2)"
           size="30px"
+          @click-action="editAction"
         />
         <MaterialIcon
           icon="delete"
@@ -58,6 +59,10 @@ export default class Task extends Vue {
 
   checkedAction() {
     this.checked = !this.checked;
+  }
+
+  editAction() {
+    this.$emit('update-action', this.keyNumber);
   }
 }
 </script>
