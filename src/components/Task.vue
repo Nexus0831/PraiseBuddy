@@ -1,17 +1,17 @@
 <template>
-  <div class="task" :class="checked ? 'checked-task' : 'non-checked-task'" >
+  <div class="task" :class="done ? 'checked-task' : 'non-checked-task'" >
     <div class="task-checkbox-container">
       <input type="checkbox" :id="keyNumber"/>
       <label :for="keyNumber" @click="checkedAction"></label>
     </div>
     <div class="task-detail-container">
-      <div class="task-title" :class="{'checked-text': checked}">
+      <div class="task-title" :class="{'checked-text': done}">
         {{ title }}
       </div>
-      <div class="task-term" :class="{'checked-text': checked}">
+      <div class="task-term" :class="{'checked-text': done}">
         期限: {{ term }}
       </div>
-      <div class="task-body" :class="{'checked-text': checked}">
+      <div class="task-body" :class="{'checked-text': done}">
         {{ memo }}
       </div>
       <div class="task-menu">
@@ -29,6 +29,7 @@
           rippleColor="rgba(176, 0, 32, 0.5)"
           hoverColor="rgba(227, 51, 83, 0.2)"
           size="30px"
+          @click-action="alertOpen"
         />
       </div>
     </div>
@@ -55,14 +56,16 @@ export default class Task extends Vue {
 
   @Prop() private done!: boolean;
 
-  checked = this.done;
-
   checkedAction() {
-    this.checked = !this.checked;
+    this.$store.dispatch('todoCompleted', this.keyNumber);
   }
 
   editAction() {
     this.$emit('update-action', this.keyNumber);
+  }
+
+  alertOpen() {
+    this.$store.commit('SET_ALERT_ID', this.keyNumber);
   }
 }
 </script>

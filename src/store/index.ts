@@ -23,6 +23,7 @@ export default new Vuex.Store({
       term: '',
       validate: true,
     },
+    alertId: '',
   },
   getters: {
     getTask: (state) => (key: string) => state.tasks.filter((e: any) => e.key === key)[0],
@@ -57,6 +58,9 @@ export default new Vuex.Store({
       state.todoCreateFields.validate = validate;
     },
     // *-- end --*
+    SET_ALERT_ID: (state, key) => {
+      state.alertId = key;
+    },
   },
   actions: {
     todoRead: (context) => {
@@ -135,6 +139,19 @@ export default new Vuex.Store({
       } else {
         context.dispatch('todoUpdate', context.state.todoCreateFields.key).then();
       }
+    },
+    todoDelete: (context, key) => {
+      firebase.database().ref(`/users/${context.state.user.uid}/tasks/${key}`).remove().then(() => {
+        context.dispatch('todoRead').then();
+      });
+    },
+    todoCompleted: (context, key) => {
+      const isDone = !context.getters.getTask(key).done;
+      firebase.database().ref(`/users/${context.state.user.uid}/tasks/${key}`).update({
+        done: isDone,
+      }).then(() => {
+        context.dispatch('todoRead').then();
+      });
     },
   },
   modules: {

@@ -16,6 +16,15 @@
           :done="item.done"
           @update-action="dialogEditOpen"
         />
+        <transition name="alert" :key="item.key">
+          <Alert
+            :title="`警告！ タスク「${item.title}」を削除しますか？`"
+            :message="`この操作は取り消しができず、削除したタスクは復元できません`"
+            v-if="alertId === item.key"
+            @alert-action="todoDelete(item.key)"
+            @alert-close="alertClose"
+          />
+        </transition>
       </template>
       <FAB
         icon="add"
@@ -49,12 +58,14 @@ import { mapActions, mapState } from 'vuex';
 import FAB from '@/components/FloatingActionButton.vue';
 import TodoDialogForm from '@/components/TodoDialogForm.vue';
 import Task from '@/components/Task.vue';
+import Alert from '@/components/Alert.vue';
   // @ is an alias to /src
   @Component({
     components: {
       FAB,
       TodoDialogForm,
       Task,
+      Alert,
     },
     computed: {
       ...mapState([
@@ -62,11 +73,13 @@ import Task from '@/components/Task.vue';
         'tasks',
         'todoCreateFields',
         'isDialogOpen',
+        'alertId',
       ]),
     },
     methods: {
       ...mapActions([
         'todoSubmit',
+        'todoDelete',
       ]),
     },
   })
@@ -106,6 +119,10 @@ export default class HomeView extends Vue {
   dialogClose() {
     this.$store.commit('SET_IS_DIALOG_OPEN', false);
     this.$store.dispatch('todoFieldsClear');
+  }
+
+  alertClose() {
+    this.$store.commit('SET_ALERT_ID', '');
   }
 }
 </script>
