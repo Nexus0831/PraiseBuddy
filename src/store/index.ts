@@ -115,6 +115,7 @@ export default new Vuex.Store({
             context.commit('SET_IS_DIALOG_OPEN', false);
             context.dispatch('todoFieldsClear').then();
             context.dispatch('todoRead').then();
+            // ここでアニメーションを再生
           });
       } else {
         context.commit('SET_TODO_CREATE_FIELDS_VALIDATE', false);
@@ -151,6 +152,7 @@ export default new Vuex.Store({
         done: isDone,
       }).then(() => {
         context.dispatch('todoRead').then();
+        // ここでアニメーションを再生
       });
     },
   },

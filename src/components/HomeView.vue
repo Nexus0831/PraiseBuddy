@@ -36,7 +36,7 @@
       />
     </div>
     <div class="animation-area">
-      <h1>ここにアニメーションを表示</h1>
+      <ConfettiAnimation/>
     </div>
     <transition name="fade">
       <TodoDialogForm
@@ -59,6 +59,7 @@ import FAB from '@/components/FloatingActionButton.vue';
 import TodoDialogForm from '@/components/TodoDialogForm.vue';
 import Task from '@/components/Task.vue';
 import Alert from '@/components/Alert.vue';
+import ConfettiAnimation from '@/components/ConfettiAnimation.vue';
   // @ is an alias to /src
   @Component({
     components: {
@@ -66,6 +67,7 @@ import Alert from '@/components/Alert.vue';
       TodoDialogForm,
       Task,
       Alert,
+      ConfettiAnimation,
     },
     computed: {
       ...mapState([
@@ -158,9 +160,9 @@ export default class HomeView extends Vue {
   .animation-area
     grid-row 1 / 2
     grid-column 3 / 4
-    display flex
-    justify-content center
-    align-items center
+    /*display flex*/
+    /*justify-content center*/
+    /*align-items center*/
     background-color #ccc
 
 </style>
