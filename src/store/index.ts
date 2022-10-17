@@ -159,7 +159,7 @@ export default new Vuex.Store({
         // ここでアニメーションを再生
         if (isDone) {
           context.commit('SET_IS_ANIMATION', true);
-          setTimeout(() => context.commit('SET_IS_ANIMATION', false), 8000);
+          setTimeout(() => context.commit('SET_IS_ANIMATION', false), 10000);
         }
       });
     },
