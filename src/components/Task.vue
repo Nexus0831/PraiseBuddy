@@ -1,7 +1,7 @@
 <template>
   <div class="task" :class="done ? 'checked-task' : 'non-checked-task'" >
     <div class="task-checkbox-container">
-      <input type="checkbox" :id="keyNumber"/>
+      <input type="checkbox" :id="keyNumber" :checked="done"/>
       <label :for="keyNumber" @click="checkedAction"></label>
     </div>
     <div class="task-detail-container">

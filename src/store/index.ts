@@ -24,7 +24,7 @@ export default new Vuex.Store({
       validate: true,
     },
     alertId: '',
-    isAnimation: false,
+    isAnimation: true,
   },
   getters: {
     getTask: (state) => (key: string) => state.tasks.filter((e: any) => e.key === key)[0],
@@ -159,7 +159,7 @@ export default new Vuex.Store({
         // ここでアニメーションを再生
         if (isDone) {
           context.commit('SET_IS_ANIMATION', true);
-          setTimeout(() => context.commit('SET_IS_ANIMATION', false), 10000);
+          setTimeout(() => context.commit('SET_IS_ANIMATION', false), 8000);
         }
       });
     },
