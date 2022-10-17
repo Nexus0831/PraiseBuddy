@@ -93,17 +93,17 @@ export default class ConfettiAnimation extends Vue {
 
   .message-animation
     animation heartBeat 2s ease-in-out infinite
-    /*animation-delay 3s*/
+    animation-delay 2s
 
     span
-      color #BF4545
-      -webkit-text-stroke 2px #a480f2
+      color #FFEB3B
+      /*-webkit-text-stroke 2px #FFFFFF*/
       font-size 56px
       font-weight 500
       display inline-block
-      /*opacity 0
+      opacity 0
       transform translate(200px, -100px) scale(2)
-      animation ballDrop .5s ease-in forwards*/
+      animation ballDrop .5s ease-in forwards
 
     span:nth-of-type(2)
       animation-delay .05s

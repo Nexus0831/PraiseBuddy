@@ -36,9 +36,14 @@
       />
     </div>
     <div class="animation-area">
-      <ConfettiAnimation
-        v-if="isAnimation"
-      />
+      <transition name="fade">
+        <ConfettiAnimation
+          v-if="false"
+        />
+        <CompletionAnimation
+          v-if="isAnimation"
+        />
+      </transition>
     </div>
     <transition name="fade">
       <TodoDialogForm
@@ -62,6 +67,7 @@ import TodoDialogForm from '@/components/TodoDialogForm.vue';
 import Task from '@/components/Task.vue';
 import Alert from '@/components/Alert.vue';
 import ConfettiAnimation from '@/components/ConfettiAnimation.vue';
+import CompletionAnimation from '@/components/CompletionAnimation.vue';
   // @ is an alias to /src
   @Component({
     components: {
@@ -70,6 +76,7 @@ import ConfettiAnimation from '@/components/ConfettiAnimation.vue';
       Task,
       Alert,
       ConfettiAnimation,
+      CompletionAnimation,
     },
     computed: {
       ...mapState([
@@ -168,4 +175,9 @@ export default class HomeView extends Vue {
     /*align-items center*/
     background-color #303030
 
+  .fade-enter-active, .fade-leave-active
+    will-change opacity
+    transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  .fade-enter, .fade-leave-to
+    opacity: 0
 </style>
