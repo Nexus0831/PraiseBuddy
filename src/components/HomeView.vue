@@ -163,6 +163,6 @@ export default class HomeView extends Vue {
     /*display flex*/
     /*justify-content center*/
     /*align-items center*/
-    background-color #ccc
+    background-color #303030
 
 </style>

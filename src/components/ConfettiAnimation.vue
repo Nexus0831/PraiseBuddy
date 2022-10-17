@@ -1,5 +1,10 @@
 <template>
   <div class="root">
+    <div class="message-animation-container">
+      <h1 class="message-animation">
+        Congratulations!
+      </h1>
+    </div>
     <template v-for="i of 100">
       <div
         class="pieces"
@@ -44,20 +49,17 @@ export default class ConfettiAnimation extends Vue {
     position absolute
     height 100%
     animation fall linear infinite
-    /*animation-duration 8s*/
 
   .piece
     width 10px
     height 10px
     transform-style: preserve-3d;
     animation piece linear infinite
-    /*animation-duration 2s*/
 
   .front
     position absolute
     width 100%
     height 100%
-    /*background-color green*/
 
   .back
     position absolute
@@ -65,6 +67,21 @@ export default class ConfettiAnimation extends Vue {
     height 100%
     background-color rgba(255, 255, 255, 0.8)
     backface-visibility hidden
+
+  .message-animation-container
+    position absolute
+    width 100%
+    height 100%
+    display flex
+    justify-content center
+    align-items center
+
+  .message-animation
+    font-size 56px
+    font-weight 500
+    color white
+    animation pic linear infinite
+    animation-duration 2s
 
   @keyframes piece
     0%
@@ -83,4 +100,17 @@ export default class ConfettiAnimation extends Vue {
       transform translate(200%, 75%)
     100%
       transform translate(0%, 100%)
+
+  @keyframes pic
+    0%
+      transform scale(1)
+    25%
+      transform scale(1.5)
+    50%
+      transform scale(1)
+    75%
+      transform scale(1.5)
+    100%
+      transform scale(1)
+
 </style>
