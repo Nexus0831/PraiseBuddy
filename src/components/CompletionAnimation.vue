@@ -38,22 +38,22 @@ export default class CompletionAnimation extends Vue {}
       display flex
       align-items center
       justify-content center
-      transform rotate(0.02turn)
+      transform rotate(0.02turn) scale(2)
 
       .one
         height 60px
         width 20px
         /*transform translate(-20px, 20px) rotate(0.35turn)*/
-        transform translate(-40px, 20px) rotate(-55deg)
+        transform translate(-41px, 20px) rotate(-55deg)
 
         .one-line
           display inline-block
           width 100%
           height 100%
           background-color aquamarine
-          opacity 0.5
+          opacity 0
           transform-origin top
-          animation oneLine 1s linear forwards
+          animation oneLine .5s ease-in-out forwards
 
       .two
         width 20px
@@ -68,8 +68,8 @@ export default class CompletionAnimation extends Vue {}
           background-color aquamarine
           opacity 0
           transform-origin top
-          animation oneLine 1s linear forwards
-          animation-delay 1s
+          animation oneLine .5s ease-in-out forwards
+          animation-delay .5s
 
     @keyframes oneLine
       0%
