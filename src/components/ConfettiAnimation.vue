@@ -79,7 +79,8 @@ export default class ConfettiAnimation extends Vue {
   .message-animation
     font-size 56px
     font-weight 500
-    color white
+    color #BF4545
+    -webkit-text-stroke 2px #a480f2
     animation pic linear infinite
     animation-duration 2s
 
@@ -105,11 +106,11 @@ export default class ConfettiAnimation extends Vue {
     0%
       transform scale(1)
     25%
-      transform scale(1.5)
+      transform scale(1.3)
     50%
       transform scale(1)
     75%
-      transform scale(1.5)
+      transform scale(1.3)
     100%
       transform scale(1)
 

@@ -36,7 +36,9 @@
       />
     </div>
     <div class="animation-area">
-      <ConfettiAnimation/>
+      <ConfettiAnimation
+        v-if="isAnimation"
+      />
     </div>
     <transition name="fade">
       <TodoDialogForm
@@ -76,6 +78,7 @@ import ConfettiAnimation from '@/components/ConfettiAnimation.vue';
         'todoCreateFields',
         'isDialogOpen',
         'alertId',
+        'isAnimation',
       ]),
     },
     methods: {
