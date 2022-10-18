@@ -37,11 +37,11 @@
     </div>
     <div class="animation-area">
       <transition name="fade">
-        <ConfettiAnimation
-          v-if="false"
-        />
         <CompletionAnimation
-          v-if="isAnimation"
+          v-if="isCompAnimation"
+        />
+        <ConfettiAnimation
+          v-if="isConfettiAnimation"
         />
       </transition>
     </div>
@@ -85,7 +85,8 @@ import CompletionAnimation from '@/components/CompletionAnimation.vue';
         'todoCreateFields',
         'isDialogOpen',
         'alertId',
-        'isAnimation',
+        'isCompAnimation',
+        'isConfettiAnimation',
       ]),
     },
     methods: {

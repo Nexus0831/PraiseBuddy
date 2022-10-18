@@ -24,7 +24,8 @@ export default new Vuex.Store({
       validate: true,
     },
     alertId: '',
-    isAnimation: true,
+    isCompAnimation: false,
+    isConfettiAnimation: false,
   },
   getters: {
     getTask: (state) => (key: string) => state.tasks.filter((e: any) => e.key === key)[0],
@@ -62,8 +63,11 @@ export default new Vuex.Store({
     SET_ALERT_ID: (state, key) => {
       state.alertId = key;
     },
-    SET_IS_ANIMATION: (state, isAnimation) => {
-      state.isAnimation = isAnimation;
+    SET_IS_COMP_ANIMATION: (state, isCompAnimation) => {
+      state.isCompAnimation = isCompAnimation;
+    },
+    SET_IS_CONFETTI_ANIMATION: (state, isConfettiAnimation) => {
+      state.isConfettiAnimation = isConfettiAnimation;
     },
   },
   actions: {
@@ -158,8 +162,12 @@ export default new Vuex.Store({
         context.dispatch('todoRead').then();
         // ここでアニメーションを再生
         if (isDone) {
-          context.commit('SET_IS_ANIMATION', true);
-          setTimeout(() => context.commit('SET_IS_ANIMATION', false), 10000);
+          context.commit('SET_IS_COMP_ANIMATION', true);
+          setTimeout(() => {
+            context.commit('SET_IS_COMP_ANIMATION', false);
+            context.commit('SET_IS_CONFETTI_ANIMATION', true);
+          }, 3500);
+          setTimeout(() => context.commit('SET_IS_CONFETTI_ANIMATION', false), 9000);
         }
       });
     },
