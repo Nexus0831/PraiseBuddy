@@ -26,6 +26,7 @@ export default new Vuex.Store({
     alertId: '',
     isCompAnimation: false,
     isConfettiAnimation: false,
+    isTaskSubmitAnimation: false,
   },
   getters: {
     getTask: (state) => (key: string) => state.tasks.filter((e: any) => e.key === key)[0],
@@ -68,6 +69,9 @@ export default new Vuex.Store({
     },
     SET_IS_CONFETTI_ANIMATION: (state, isConfettiAnimation) => {
       state.isConfettiAnimation = isConfettiAnimation;
+    },
+    SET_IS_TASK_SUBMIT_ANIMATION: (state, isTaskSubmitAnimation) => {
+      state.isTaskSubmitAnimation = isTaskSubmitAnimation;
     },
   },
   actions: {
@@ -124,6 +128,10 @@ export default new Vuex.Store({
             context.dispatch('todoFieldsClear').then();
             context.dispatch('todoRead').then();
             // ここでアニメーションを再生
+            context.commit('SET_IS_TASK_SUBMIT_ANIMATION', true);
+            setTimeout(() => {
+              context.commit('SET_IS_TASK_SUBMIT_ANIMATION', false);
+            }, 8000);
           });
       } else {
         context.commit('SET_TODO_CREATE_FIELDS_VALIDATE', false);
@@ -167,7 +175,7 @@ export default new Vuex.Store({
             context.commit('SET_IS_COMP_ANIMATION', false);
             context.commit('SET_IS_CONFETTI_ANIMATION', true);
           }, 3500);
-          setTimeout(() => context.commit('SET_IS_CONFETTI_ANIMATION', false), 9000);
+          setTimeout(() => context.commit('SET_IS_CONFETTI_ANIMATION', false), 10000);
         }
       });
     },

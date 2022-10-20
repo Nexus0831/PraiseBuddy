@@ -43,6 +43,9 @@
         <ConfettiAnimation
           v-if="isConfettiAnimation"
         />
+        <TaskSubmitAnimation
+          v-if="isTaskSubmitAnimation"
+        />
       </transition>
     </div>
     <transition name="fade">
@@ -68,6 +71,7 @@ import Task from '@/components/Task.vue';
 import Alert from '@/components/Alert.vue';
 import ConfettiAnimation from '@/components/ConfettiAnimation.vue';
 import CompletionAnimation from '@/components/CompletionAnimation.vue';
+import TaskSubmitAnimation from '@/components/TaskSubmitAnimation.vue';
   // @ is an alias to /src
   @Component({
     components: {
@@ -77,6 +81,7 @@ import CompletionAnimation from '@/components/CompletionAnimation.vue';
       Alert,
       ConfettiAnimation,
       CompletionAnimation,
+      TaskSubmitAnimation,
     },
     computed: {
       ...mapState([
@@ -87,6 +92,7 @@ import CompletionAnimation from '@/components/CompletionAnimation.vue';
         'alertId',
         'isCompAnimation',
         'isConfettiAnimation',
+        'isTaskSubmitAnimation',
       ]),
     },
     methods: {
