@@ -26,7 +26,7 @@ export default new Vuex.Store({
     alertId: '',
     isCompAnimation: false,
     isConfettiAnimation: false,
-    isTaskSubmitAnimation: true,
+    isTaskSubmitAnimation: false,
   },
   getters: {
     getTask: (state) => (key: string) => state.tasks.filter((e: any) => e.key === key)[0],
@@ -131,7 +131,7 @@ export default new Vuex.Store({
             context.commit('SET_IS_TASK_SUBMIT_ANIMATION', true);
             setTimeout(() => {
               context.commit('SET_IS_TASK_SUBMIT_ANIMATION', false);
-            }, 8000);
+            }, 13000);
           });
       } else {
         context.commit('SET_TODO_CREATE_FIELDS_VALIDATE', false);

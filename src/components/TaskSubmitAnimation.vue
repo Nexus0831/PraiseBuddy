@@ -86,6 +86,31 @@
           </svg>
         </div>
       </div>
+      <div class="second-text-animation-container">
+        <div class="second-text-animation">
+          <span>目</span>
+          <span>標</span>
+          <span>に</span>
+          <span>向</span>
+          <span>か</span>
+          <span>う</span>
+          <span>あ</span>
+          <span>な</span>
+          <span>た</span>
+          <span>は</span>
+          <br>
+          <span>誰</span>
+          <span>よ</span>
+          <span>り</span>
+          <span>も</span>
+          <span>輝</span>
+          <span>い</span>
+          <span>て</span>
+          <span>い</span>
+          <span>ま</span>
+          <span>す</span>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -109,8 +134,8 @@ export default class TaskSubmitAnimation extends Vue {}
     flex-direction column
 
     .first-animation
-      /*animation display .1s ease-in 4s forwards*/
-      display none
+      animation fadeDisplay .2s ease-in 4s forwards
+      position absolute
 
       .good-animation-container
         display flex
@@ -161,18 +186,96 @@ export default class TaskSubmitAnimation extends Vue {}
             animation-delay 1.95s
 
     .second-animation
+      animation popDisplay .1s linear 4.4s forwards
+      opacity 0
+
       .flag-run-animation-container
         display flex
         justify-content flex-end
         align-items flex-end
         width 580px
-        fill #e91e63
+
+        &::after
+          content ""
+          position absolute
+          right 0
+          border-bottom 6px solid #757575
+          width 100%
+          height 6px
 
         .run-animation
-          transform-origin center
-          animation slideInLeft 1.5s linear forwards
+          animation slideInLeft 1s linear 4.5s forwards
+          transform translate3d(-400px, 0, 0)
+          fill #F2CFBB
           .run
-            animation swing 1.5s linear forwards
+            animation swing 1s linear 4.5s forwards
+            overflow visible
+
+            path
+              animation shine 2s linear 6.5s forwards
+
+        .flag-animation
+          fill #BF4545
+          animation shakeY 1s linear 5.5s forwards
+
+      .second-text-animation-container
+        display flex
+        align-items center
+        justify-content center
+
+        .second-text-animation
+          animation pikaPika 2s linear 9s forwards
+
+          span
+            color #FFEB3B
+            /*-webkit-text-stroke 2px #FFFFFF*/
+            font-size 48px
+            font-weight bold
+            display inline-block
+            opacity 0
+            transform translate(0, -100px) rotate(360deg) scale(0)
+            animation revolveDrop .3s forwards
+
+          span:nth-of-type(1)
+            animation-delay 6.5s
+          span:nth-of-type(2)
+            animation-delay 6.55s
+          span:nth-of-type(3)
+            animation-delay 6.6s
+          span:nth-of-type(4)
+            animation-delay 6.65s
+          span:nth-of-type(5)
+            animation-delay 6.7s
+          span:nth-of-type(6)
+            animation-delay 6.75s
+          span:nth-of-type(7)
+            animation-delay 6.8s
+          span:nth-of-type(8)
+            animation-delay 6.85s
+          span:nth-of-type(9)
+            animation-delay 6.9s
+          span:nth-of-type(10)
+            animation-delay 6.95s
+          span:nth-of-type(11)
+            animation-delay 7s
+          span:nth-of-type(12)
+            animation-delay 7.05s
+          span:nth-of-type(13)
+            animation-delay 7.1s
+          span:nth-of-type(14)
+            animation-delay 7.15s
+          span:nth-of-type(15)
+            animation-delay 7.2s
+          span:nth-of-type(16)
+            animation-delay 7.25s
+          span:nth-of-type(17)
+            animation-delay 7.3s
+          span:nth-of-type(18)
+            animation-delay 7.35s
+          span:nth-of-type(19)
+            animation-delay 7.4s
+          span:nth-of-type(20)
+            animation-delay 7.45s
 
   @keyframes sideSlide
     60%
@@ -200,9 +303,13 @@ export default class TaskSubmitAnimation extends Vue {}
       transform translate(0) scale(1) rotate(0deg)
       opacity 1
 
-  @keyframes display
+  @keyframes fadeDisplay
     100%
       opacity 0
+
+  @keyframes popDisplay
+    100%
+      opacity 1
 
   @keyframes shakeY
     from,
@@ -220,7 +327,30 @@ export default class TaskSubmitAnimation extends Vue {}
     40%,
     60%,
     80%
-      transform translate3d(0, 10px, 0)
+      transform translate3d(0, 0, 0)
+
+  @keyframes pikaPika
+    from
+      filter none
+      text-shadow none
+    to
+      filter brightness(110%)
+      text-shadow 0 0 1.75rem #FFEB3B
+
+    10%,
+    30%,
+    50%,
+    70%,
+    90%
+      filter none
+      text-shadow none
+
+    20%,
+    40%,
+    60%,
+    80%
+      filter brightness(110%)
+      text-shadow 0 0 1.75rem #FFEB3B
 
   @keyframes slideInLeft
     0%
@@ -243,4 +373,23 @@ export default class TaskSubmitAnimation extends Vue {}
       transform rotate(-10deg)
     100%
       transform rotate(0deg)
+
+  @keyframes shine
+    from
+      filter drop-shadow(0 0 300px #FFEB3B)
+    to
+      filter drop-shadow(0 0 100px #FFEB3B)
+
+    10%,
+    30%,
+    50%,
+    70%,
+    90%
+      filter drop-shadow(0 0 100px #FFEB3B)
+
+    20%,
+    40%,
+    60%,
+    80%
+      filter drop-shadow(0 0 300px #FFEB3B)
 </style>
