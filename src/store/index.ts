@@ -26,7 +26,7 @@ export default new Vuex.Store({
     alertId: '',
     isCompAnimation: false,
     isConfettiAnimation: false,
-    isTaskSubmitAnimation: false,
+    isTaskSubmitAnimation: true,
   },
   getters: {
     getTask: (state) => (key: string) => state.tasks.filter((e: any) => e.key === key)[0],
