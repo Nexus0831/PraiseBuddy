@@ -37,6 +37,9 @@
     </div>
     <div class="animation-area">
       <transition name="fade">
+        <ClockAnimation
+          v-if="!isCompAnimation && !isConfettiAnimation && !isTaskSubmitAnimation"
+        />
         <CompletionAnimation
           v-if="isCompAnimation"
         />
@@ -72,6 +75,7 @@ import Alert from '@/components/Alert.vue';
 import ConfettiAnimation from '@/components/ConfettiAnimation.vue';
 import CompletionAnimation from '@/components/CompletionAnimation.vue';
 import TaskSubmitAnimation from '@/components/TaskSubmitAnimation.vue';
+import ClockAnimation from '@/components/ClockAnimation.vue';
   // @ is an alias to /src
   @Component({
     components: {
@@ -82,6 +86,7 @@ import TaskSubmitAnimation from '@/components/TaskSubmitAnimation.vue';
       ConfettiAnimation,
       CompletionAnimation,
       TaskSubmitAnimation,
+      ClockAnimation,
     },
     computed: {
       ...mapState([
