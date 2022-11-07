@@ -37,6 +37,7 @@
         </div>
         <div class="cloud one"></div>
         <div class="cloud two"></div>
+        <div class="cloud three"></div>
       </div>
     </div>
   </div>
@@ -159,8 +160,9 @@ export default class ClockAnimation extends Vue {
       .sun-container
         grid-column 1 / 3
         grid-row 1 / 2
-        display flex
-        align-items flex-end
+        /*display flex*/
+        /*align-items flex-end*/
+        display grid
 
         .sun
           width 128px
@@ -174,7 +176,7 @@ export default class ClockAnimation extends Vue {
           height 100px
           border-radius 50%
           box-shadow -26px 0px 0px 20px #FDD835;
-          transform translate(100px, -100px) rotate(-160deg)
+          transform translate(120px, 20px) rotate(-160deg)
           filter drop-shadow(0 0 12px #FDD835)
           z-index 2000
           /*background-color #FDD835*/
@@ -182,16 +184,17 @@ export default class ClockAnimation extends Vue {
         .morning
           background-color #FFF59D
           filter drop-shadow(0 0 24px #FFF59D)
+          transform translate(10px, 110px)
 
         .noon
           background-color #FFF176
           filter drop-shadow(0 0 24px #FFF176)
-          transform translate(150px, -90px)
+          transform translate(120px, 10px)
 
         .sunset
           background-color #FDD835
           filter drop-shadow(0 0 12px #FDD835)
-          transform translate(210px, 50px)
+          transform translate(210px, 160px)
 
         .cloud
           width 204px
@@ -211,13 +214,39 @@ export default class ClockAnimation extends Vue {
             border-radius 50%
             box-shadow 57px 0 0 19px #ffffff
         .one
-          transform translate(-90px, -110px)
           z-index 1000
           box-shadow 8px 12px 18px -10px rgba(0,0,0,0.6)
           opacity .7
+          animation cloudMove1 40s linear infinite
+
         .two
-          transform translate(-90px, -50px)
           z-index 3000
           box-shadow 8px 12px 15px -7px rgba(0,0,0,0.4)
           opacity .9
+          animation cloudMove2 20s linear infinite
+
+        .three
+          z-index 2500
+          box-shadow 8px 12px 15px -7px rgba(0,0,0,0.5)
+          opacity .8
+          animation cloudMove3 30s linear infinite
+
+  @keyframes cloudMove1
+    0%
+      transform translate(450px, -70px)
+    100%
+      transform translate(-210px, -70px)
+
+  @keyframes cloudMove2
+    0%
+      transform translate(600px, -50px)
+    100%
+      transform translate(-210px, -50px)
+
+  @keyframes cloudMove3
+    0%
+      transform translate(500px, -150px)
+    100%
+      transform translate(-210px, -150px)
+
 </style>
