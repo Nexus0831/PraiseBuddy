@@ -1,6 +1,14 @@
 <template>
   <div class="clock-root">
-    <div class="clock">
+    <div
+      class="clock"
+      :class="[
+        { 'noon-background': 6 <= nowHour && nowHour <= 9 },
+        { 'noon-background': 10 <= nowHour && nowHour <= 16 },
+        { 'sunset-background': 17 <= nowHour && nowHour <= 19 },
+        { 'night-background': nowHour <= 5 || 20 <= nowHour },
+      ]"
+    >
       <div class="day">
         {{ nowToDay }}
       </div>
@@ -19,6 +27,9 @@
     >
       <div class="mountain-1"></div>
       <div class="mountain-2"></div>
+<!--      <div class="town-container">-->
+<!--          <div class="building"></div>-->
+<!--      </div>-->
       <div class="sun-container">
         <div
           class="sun"
@@ -98,24 +109,24 @@ export default class ClockAnimation extends Vue {
     width 100%
     height 100%
     display grid
-    grid-template-rows 36px 168px 248px 1fr
+    grid-template-rows 50% 50%
     overflow hidden
 
     .clock
-      padding-top 12px
-      color #F2CFBB
-      grid-row 2 / 3
+      grid-row 1 / 2
       display flex
       justify-content center
       align-items center
       flex-direction column
+      color #BF4545
+      text-shadow 3px 4px 1px rgba(0,0,0,0.3)
 
       .day
         font-size 36px
-        color #e91e63
+        /*color #e91e63*/
       .time
         font-size 78px
-        color #e91e63
+        /*color #e91e63*/
 
     .morning-background
       background linear-gradient(#B2EBF2, #FFE082)
@@ -130,19 +141,33 @@ export default class ClockAnimation extends Vue {
       background-color #1A237E
 
     .scene
-      grid-row 4 / 5
+      grid-row 2 / 3
       display grid
       grid-template-columns 50% 50%
       grid-template-rows 50% 50%
-      overflow hidden
+      /*overflow hidden*/
+      align-items flex-end
+
+      .town-container
+        grid-column 1 / 3
+        grid-row 2 / 3
+        display flex
+        align-items flex-end
+
+        .building
+          height 128px
+          width 64px
+          background-color #FFFFFF
 
       .mountain-1
         grid-column 1 / 2
         grid-row 2 / 3
         background-color #4CAF50
-        margin-right -20px
-        border-radius 40% 60% 0 0
+        margin-right -80px
+        margin-left -30px
+        border-radius 50% 50% 100% 0 / 100% 100% 0 0
         z-index 4000
+        height 100%
         box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2),
           0px 24px 38px 3px rgba(0, 0, 0, 0.14),
           0px 9px 46px 8px rgba(0, 0, 0, 0.12);
@@ -151,8 +176,9 @@ export default class ClockAnimation extends Vue {
         grid-column 2 / 3
         grid-row 1 / 3
         background-color #4CAF50
-        border-radius 90% 0 0 0
+        border-radius 100% 0 100% 0 / 100% 100% 0 0
         z-index 5000
+        height 80%
         box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2),
           0px 24px 38px 3px rgba(0, 0, 0, 0.14),
           0px 9px 46px 8px rgba(0, 0, 0, 0.12);
@@ -176,7 +202,7 @@ export default class ClockAnimation extends Vue {
           height 100px
           border-radius 50%
           box-shadow -26px 0px 0px 20px #FDD835;
-          transform translate(120px, 20px) rotate(-160deg)
+          transform translate(230px, -30px) rotate(-160deg)
           filter drop-shadow(0 0 12px #FDD835)
           z-index 2000
           /*background-color #FDD835*/
@@ -189,12 +215,12 @@ export default class ClockAnimation extends Vue {
         .noon
           background-color #FFF176
           filter drop-shadow(0 0 24px #FFF176)
-          transform translate(120px, 10px)
+          transform translate(230px, -30px)
 
         .sunset
           background-color #FDD835
           filter drop-shadow(0 0 12px #FDD835)
-          transform translate(210px, 160px)
+          transform translate(450px, 110px)
 
         .cloud
           width 204px
