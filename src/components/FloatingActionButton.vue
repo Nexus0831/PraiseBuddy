@@ -77,7 +77,6 @@ export default class FloatingActionButton extends Vue {
     border-radius 50%
     letter-spacing 0.02857em
     text-transform uppercase
-    z-index 500
     /*--- end ---*/
     /*--- layout ---*/
     display inline-flex
@@ -86,9 +85,10 @@ export default class FloatingActionButton extends Vue {
     justify-content center
     /*--- end *---*/
     /*--- position ---*/
-    position fixed
+    position absolute
     bottom 30px
     right 5px
+    z-index 9999
     /*--- end ---*/
     .icon-container
       width 100%

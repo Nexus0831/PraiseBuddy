@@ -54,7 +54,7 @@ export default class Alert extends Vue {
     background-color rgba(0, 0, 0, 0.3)
     width 100%
     height calc(100vh + 20px)
-    z-index 9999
+    z-index 99999
     backdrop-filter blur(6px)
     /*--- end ---*/
     /*--- layout ---*/

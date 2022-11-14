@@ -38,7 +38,7 @@
     <div class="animation-area">
       <transition name="fade">
         <ClockAnimation
-          v-if="!isCompAnimation && !isConfettiAnimation && !isTaskSubmitAnimation"
+          v-if="isClockAnimation"
         />
         <CompletionAnimation
           v-if="isCompAnimation"
@@ -98,6 +98,7 @@ import ClockAnimation from '@/components/ClockAnimation.vue';
         'isCompAnimation',
         'isConfettiAnimation',
         'isTaskSubmitAnimation',
+        'isClockAnimation',
       ]),
     },
     methods: {
@@ -175,7 +176,7 @@ export default class HomeView extends Vue {
   .task-list
     grid-row 1 / 2
     grid-column 2 / 3
-    z-index 90
+    z-index 8000
     position relative
     overflow auto
 

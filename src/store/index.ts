@@ -27,6 +27,7 @@ export default new Vuex.Store({
     isCompAnimation: false,
     isConfettiAnimation: false,
     isTaskSubmitAnimation: false,
+    isClockAnimation: true,
   },
   getters: {
     getTask: (state) => (key: string) => state.tasks.filter((e: any) => e.key === key)[0],
@@ -72,6 +73,9 @@ export default new Vuex.Store({
     },
     SET_IS_TASK_SUBMIT_ANIMATION: (state, isTaskSubmitAnimation) => {
       state.isTaskSubmitAnimation = isTaskSubmitAnimation;
+    },
+    SET_IS_CLOCK_ANIMATION: (state, isClockAnimation) => {
+      state.isClockAnimation = isClockAnimation;
     },
   },
   actions: {
@@ -128,9 +132,11 @@ export default new Vuex.Store({
             context.dispatch('todoFieldsClear').then();
             context.dispatch('todoRead').then();
             // ここでアニメーションを再生
+            context.commit('SET_IS_CLOCK_ANIMATION', false);
             context.commit('SET_IS_TASK_SUBMIT_ANIMATION', true);
             setTimeout(() => {
               context.commit('SET_IS_TASK_SUBMIT_ANIMATION', false);
+              context.commit('SET_IS_CLOCK_ANIMATION', true);
             }, 13000);
           });
       } else {
@@ -170,12 +176,16 @@ export default new Vuex.Store({
         context.dispatch('todoRead').then();
         // ここでアニメーションを再生
         if (isDone) {
+          context.commit('SET_IS_CLOCK_ANIMATION', false);
           context.commit('SET_IS_COMP_ANIMATION', true);
           setTimeout(() => {
             context.commit('SET_IS_COMP_ANIMATION', false);
             context.commit('SET_IS_CONFETTI_ANIMATION', true);
           }, 3500);
-          setTimeout(() => context.commit('SET_IS_CONFETTI_ANIMATION', false), 10000);
+          setTimeout(() => {
+            context.commit('SET_IS_CONFETTI_ANIMATION', false);
+            context.commit('SET_IS_CLOCK_ANIMATION', true);
+          }, 10000);
         }
       });
     },

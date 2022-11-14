@@ -63,7 +63,7 @@ export default class ClockAnimation extends Vue {
 
   private nowTime = '';
 
-  private nowHour = 0;
+  private nowHour:number = new Date().getHours();
 
   showClock() {
     const d = new Date();
@@ -243,19 +243,19 @@ export default class ClockAnimation extends Vue {
           z-index 1000
           box-shadow 8px 12px 18px -10px rgba(0,0,0,0.6)
           opacity .7
-          animation cloudMove1 40s linear infinite
+          animation cloudMove1 300s linear infinite
 
         .two
           z-index 3000
           box-shadow 8px 12px 15px -7px rgba(0,0,0,0.4)
           opacity .9
-          animation cloudMove2 20s linear infinite
+          animation cloudMove2 100s linear infinite
 
         .three
           z-index 2500
           box-shadow 8px 12px 15px -7px rgba(0,0,0,0.5)
           opacity .8
-          animation cloudMove3 30s linear infinite
+          animation cloudMove3 200s linear infinite
 
   @keyframes cloudMove1
     0%
