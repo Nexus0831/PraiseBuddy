@@ -73,16 +73,17 @@ export default class Task extends Vue {
 <style lang="stylus" scoped>
   .checked-task
     background-color #a480f2
+    border-bottom 1px solid #F2CFBB
 
   .non-checked-task
     background-color #F2CFBB
+    border-bottom 1px solid #BF4545
 
   .task
     width 100%
     height 150px
     display grid
     grid-template-columns 60px 1fr
-    border-bottom 1px solid #BF4545
     transition all 0.2s
 
     .task-checkbox-container

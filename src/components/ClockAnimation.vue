@@ -64,6 +64,7 @@ export default class ClockAnimation extends Vue {
   private nowTime = '';
 
   private nowHour:number = new Date().getHours();
+  // private nowHour = 22;
 
   showClock() {
     const d = new Date();

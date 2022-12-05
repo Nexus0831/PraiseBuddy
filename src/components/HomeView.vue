@@ -2,36 +2,51 @@
   <div id="home">
     <div class="said-bar">
       <div>
-        <img :src="user.photoURL" alt="" class="user-icon">
+        <img :src="user.photoURL" alt="" class="user-icon" referrerpolicy="no-referrer">
+      </div>
+      <div
+        class="in-checked-task-tab tab"
+        :class="{'selected': !isCheckedTaskSelect}"
+        @click="inCheckedTaskSelect"
+      >
+        未完了
+      </div>
+      <div
+        class="checked-task-tab tab"
+        :class="{'selected': isCheckedTaskSelect}"
+        @click="checkedTaskSelect"
+      >
+        完了
       </div>
     </div>
-    <div class="task-list">
+    <div class="task-list" :style="{'background-color': isCheckedTaskSelect ? '#A480F2' : '#F2CFBB'}">
       <template v-for="item in tasks">
-        <Task
-          :key="item.key"
-          :keyNumber="item.key"
-          :title="item.title"
-          :memo="item.memo"
-          :term="item.term"
-          :done="item.done"
-          @update-action="dialogEditOpen"
-        />
-        <transition name="alert" :key="item.key">
-          <Alert
-            :title="`警告！ タスク「${item.title}」を削除しますか？`"
-            :message="`この操作は取り消しができず、削除したタスクは復元できません`"
-            v-if="alertId === item.key"
-            @alert-action="todoDelete(item.key)"
-            @alert-close="alertClose"
+          <Task
+            :key="item.key"
+            :keyNumber="item.key"
+            :title="item.title"
+            :memo="item.memo"
+            :term="item.term"
+            :done="item.done"
+            @update-action="dialogEditOpen"
+            v-if="isCheckedTaskSelect === item.done"
           />
-        </transition>
+          <transition name="alert" :key="item.key">
+            <Alert
+              :title="`警告！ タスク「${item.title}」を削除しますか？`"
+              :message="`この操作は取り消しができず、削除したタスクは復元できません`"
+              v-if="alertId === item.key"
+              @alert-action="todoDelete(item.key)"
+              @alert-close="alertClose"
+            />
+          </transition>
       </template>
       <FAB
         icon="add"
-        style="color: #FFF"
+        :style="{'color': isCheckedTaskSelect ? '#A480F2' : '#F2CFBB'}"
         rippleColor="rgba(255, 255, 255, 0.2)"
-        hoverColor="#8350f2"
-        backgroundColor="#A480F2"
+        :hoverColor="isCheckedTaskSelect ? '#d99e7c' : '#8350f2'"
+        :backgroundColor="isCheckedTaskSelect ? '#F2CFBB' : '#A480F2'"
         @click-action="dialogOpen"
       />
     </div>
@@ -99,6 +114,7 @@ import ClockAnimation from '@/components/ClockAnimation.vue';
         'isConfettiAnimation',
         'isTaskSubmitAnimation',
         'isClockAnimation',
+        'isCheckedTaskSelect',
       ]),
     },
     methods: {
@@ -149,6 +165,14 @@ export default class HomeView extends Vue {
   alertClose() {
     this.$store.commit('SET_ALERT_ID', '');
   }
+
+  inCheckedTaskSelect() {
+    this.$store.commit('SET_IS_CHECKED_TASK_SELECT', false);
+  }
+
+  checkedTaskSelect() {
+    this.$store.commit('SET_IS_CHECKED_TASK_SELECT', true);
+  }
 }
 </script>
 
@@ -165,9 +189,43 @@ export default class HomeView extends Vue {
     grid-column 1 / 2
     background-color #BF4545
     z-index 100
-    box-shadow rgb(0 0 0 / 20%) 0px 2px 1px -1px,
-      rgb(0 0 0 / 14%) 0px 1px 1px 0px,
-      rgb(0 0 0 / 12%) 0px 1px 3px 0px
+
+    .tab
+      height 240px
+      width 100%
+      writing-mode vertical-rl
+      display flex
+      justify-content center
+      align-items center
+      font-size 24px
+      font-weight bold
+      border-radius 20px 0 0 20px
+      position relative
+      z-index 200
+      transition all .2s
+
+      &:hover
+        cursor pointer
+
+    .selected
+      z-index 300
+      box-shadow rgba(0, 0, 0, 60%) -3px 0px 10px 0px
+
+    .in-checked-task-tab
+      margin-top 124px
+      color #BF4545
+      background-color #F2CFBB
+
+      &:hover
+        background-color #d99e7c
+
+    .checked-task-tab
+      margin-top -32px
+      color #F2CFBB
+      background-color #a480f2
+
+      &:hover
+        background-color #8350f2
 
   .user-icon
     border-radius 50%
@@ -179,6 +237,10 @@ export default class HomeView extends Vue {
     z-index 8000
     position relative
     overflow auto
+    /*box-shadow rgb(0 0 0 / 20%) 0px 2px 1px -1px,
+      rgb(0 0 0 / 14%) 0px 1px 1px 0px,
+      rgb(0 0 0 / 12%) 0px 1px 3px 0px
+      */
 
   .animation-area
     grid-row 1 / 2

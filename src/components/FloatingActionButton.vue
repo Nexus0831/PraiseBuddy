@@ -14,7 +14,9 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import {
+  Component, Prop, Watch, Vue,
+} from 'vue-property-decorator';
 import rippleEffect from '@/functions/ripple';
 
 @Component({
@@ -36,6 +38,11 @@ export default class FloatingActionButton extends Vue {
   private color = 'transparent';
 
   mounted() {
+    this.color = this.backgroundColor;
+  }
+
+  @Watch('backgroundColor')
+  changeBackgroundColor() {
     this.color = this.backgroundColor;
   }
 
@@ -67,11 +74,11 @@ export default class FloatingActionButton extends Vue {
     min-width 0px
     min-height 36px
     transition background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
-    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+      box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
     border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms
     box-shadow 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
-    0px 6px 10px 0px rgba(0, 0, 0, 0.14),
-    0px 1px 18px 0px rgba(0, 0, 0, 0.12)
+      0px 6px 10px 0px rgba(0, 0, 0, 0.14),
+      0px 1px 18px 0px rgba(0, 0, 0, 0.12)
     font-weight 500
     line-height 1.5
     border-radius 50%

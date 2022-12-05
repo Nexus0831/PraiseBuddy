@@ -28,6 +28,7 @@ export default new Vuex.Store({
     isConfettiAnimation: false,
     isTaskSubmitAnimation: false,
     isClockAnimation: true,
+    isCheckedTaskSelect: false,
   },
   getters: {
     getTask: (state) => (key: string) => state.tasks.filter((e: any) => e.key === key)[0],
@@ -76,6 +77,9 @@ export default new Vuex.Store({
     },
     SET_IS_CLOCK_ANIMATION: (state, isClockAnimation) => {
       state.isClockAnimation = isClockAnimation;
+    },
+    SET_IS_CHECKED_TASK_SELECT: (state, isCheckedTaskSelect) => {
+      state.isCheckedTaskSelect = isCheckedTaskSelect;
     },
   },
   actions: {
