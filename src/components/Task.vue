@@ -139,15 +139,18 @@ export default class Task extends Vue {
         display flex
         align-items center
         font-weight 600
-        font-size 20px
+        font-size 28px
+        padding-top 8px
         color #BF4545
 
       .task-term
         height 20
+        font-size 24px
         color rgba(191, 69, 69, 1)
 
       .task-body
         height 40px
+        font-size 20px
         color rgba(191, 69, 69, 1)
 
       .task-menu
