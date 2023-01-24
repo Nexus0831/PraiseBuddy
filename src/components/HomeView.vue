@@ -28,6 +28,7 @@
             :memo="item.memo"
             :term="item.term"
             :done="item.done"
+            :style="{'filter': !item.done && (new Date(item.term) < new Date()) ? 'grayscale(60%)' : ''}"
             @update-action="dialogEditOpen"
             v-if="isCheckedTaskSelect === item.done"
           />
@@ -51,20 +52,28 @@
       />
     </div>
     <div class="animation-area">
-      <transition name="fade">
+      <transition-group name="fade">
         <ClockAnimation
           v-if="isClockAnimation"
+          key="clock"
         />
         <CompletionAnimation
           v-if="isCompAnimation"
+          key="comp"
         />
         <ConfettiAnimation
           v-if="isConfettiAnimation"
+          key="confetti"
         />
         <TaskSubmitAnimation
           v-if="isTaskSubmitAnimation"
+          key="taskSubmit"
         />
-      </transition>
+        <FailureAnimation
+          v-if="isFailureAnimation"
+          key="Failure"
+        />
+      </transition-group>
     </div>
     <transition name="fade">
       <TodoDialogForm
@@ -91,9 +100,11 @@ import ConfettiAnimation from '@/components/ConfettiAnimation.vue';
 import CompletionAnimation from '@/components/CompletionAnimation.vue';
 import TaskSubmitAnimation from '@/components/TaskSubmitAnimation.vue';
 import ClockAnimation from '@/components/ClockAnimation.vue';
+import FailureAnimation from '@/components/FailureAnimation.vue';
   // @ is an alias to /src
   @Component({
     components: {
+      FailureAnimation,
       FAB,
       TodoDialogForm,
       Task,
@@ -115,6 +126,7 @@ import ClockAnimation from '@/components/ClockAnimation.vue';
         'isTaskSubmitAnimation',
         'isClockAnimation',
         'isCheckedTaskSelect',
+        'isFailureAnimation',
       ]),
     },
     methods: {

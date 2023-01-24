@@ -1,6 +1,6 @@
 <template>
   <div class="root">
-    <div class="message-animation-container">
+    <div class="message-animation-container" v-if="isConfettiText">
       <div class="message-animation">
         <span>C</span>
         <span>o</span>
@@ -47,16 +47,23 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { mapState } from 'vuex';
 
-@Component
+@Component({
+  computed: {
+    ...mapState([
+      'isConfettiText',
+    ]),
+  },
+})
 export default class ConfettiAnimation extends Vue {
 }
 </script>
 
 <style lang="stylus" scoped>
   .root
-    position relative
-    width 100%
+    position absolute
+    width 50%
     height 100%
     overflow hidden
 

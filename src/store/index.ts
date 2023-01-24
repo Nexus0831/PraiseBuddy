@@ -26,9 +26,12 @@ export default new Vuex.Store({
     alertId: '',
     isCompAnimation: false,
     isConfettiAnimation: false,
+    isConfettiText: true,
     isTaskSubmitAnimation: false,
+    // ↓true
     isClockAnimation: true,
     isCheckedTaskSelect: false,
+    isFailureAnimation: false,
   },
   getters: {
     getTask: (state) => (key: string) => state.tasks.filter((e: any) => e.key === key)[0],
@@ -72,6 +75,9 @@ export default new Vuex.Store({
     SET_IS_CONFETTI_ANIMATION: (state, isConfettiAnimation) => {
       state.isConfettiAnimation = isConfettiAnimation;
     },
+    SET_IS_CONFETTI_TEXT: (state, isConfettiText) => {
+      state.isConfettiText = isConfettiText;
+    },
     SET_IS_TASK_SUBMIT_ANIMATION: (state, isTaskSubmitAnimation) => {
       state.isTaskSubmitAnimation = isTaskSubmitAnimation;
     },
@@ -81,12 +87,15 @@ export default new Vuex.Store({
     SET_IS_CHECKED_TASK_SELECT: (state, isCheckedTaskSelect) => {
       state.isCheckedTaskSelect = isCheckedTaskSelect;
     },
+    SET_IS_FAILURE_ANIMATION: (state, isFailureAnimation) => {
+      state.isFailureAnimation = isFailureAnimation;
+    },
   },
   actions: {
     todoRead: (context) => {
       firebase.database().ref(`/users/${context.state.user.uid}/tasks`)
         .once('value').then((snapshot) => {
-          const tasks: Record<string, unknown>[] = [];
+          const tasks: Record<string, Task>[] = [];
 
           snapshot.forEach((item: any) => {
             tasks.push({
@@ -97,6 +106,8 @@ export default new Vuex.Store({
               done: item.val().done,
             });
           });
+
+          tasks.sort((a, b) => (a.term > b.term ? 1 : -1));
 
           context.commit('SET_TASKS', tasks);
         })
@@ -169,11 +180,19 @@ export default new Vuex.Store({
     },
     todoDelete: (context, key) => {
       firebase.database().ref(`/users/${context.state.user.uid}/tasks/${key}`).remove().then(() => {
-        context.dispatch('todoRead').then();
+        context.dispatch('todoRead').then(() => {
+          context.commit('SET_IS_CLOCK_ANIMATION', false);
+          context.commit('SET_IS_FAILURE_ANIMATION', true);
+          setTimeout(() => {
+            context.commit('SET_IS_FAILURE_ANIMATION', false);
+            context.commit('SET_IS_CLOCK_ANIMATION', true);
+          }, 7000);
+        });
       });
     },
     todoCompleted: (context, key) => {
       const isDone = !context.getters.getTask(key).done;
+
       firebase.database().ref(`/users/${context.state.user.uid}/tasks/${key}`).update({
         done: isDone,
       }).then(() => {
@@ -182,12 +201,24 @@ export default new Vuex.Store({
         if (isDone) {
           context.commit('SET_IS_CLOCK_ANIMATION', false);
           context.commit('SET_IS_COMP_ANIMATION', true);
-          setTimeout(() => {
-            context.commit('SET_IS_COMP_ANIMATION', false);
-            context.commit('SET_IS_CONFETTI_ANIMATION', true);
-          }, 3500);
+          if (new Date(context.getters.getTask(key).term) < new Date()) {
+            // 期限を超えていた場合
+            setTimeout(() => {
+              context.commit('SET_IS_COMP_ANIMATION', false);
+              context.commit('SET_IS_FAILURE_ANIMATION', true);
+              context.commit('SET_IS_CONFETTI_TEXT', false);
+              context.commit('SET_IS_CONFETTI_ANIMATION', true);
+            }, 3500);
+          } else {
+            setTimeout(() => {
+              context.commit('SET_IS_COMP_ANIMATION', false);
+              context.commit('SET_IS_CONFETTI_TEXT', true);
+              context.commit('SET_IS_CONFETTI_ANIMATION', true);
+            }, 3500);
+          }
           setTimeout(() => {
             context.commit('SET_IS_CONFETTI_ANIMATION', false);
+            context.commit('SET_IS_FAILURE_ANIMATION', false);
             context.commit('SET_IS_CLOCK_ANIMATION', true);
           }, 10000);
         }

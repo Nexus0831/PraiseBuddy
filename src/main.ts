@@ -19,7 +19,7 @@ firebase.auth().onAuthStateChanged((user) => {
 
     if (router.currentRoute.path === '/login') {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
-      router.push('/', () => {});
+      router.push('/login', () => {});
     }
   } else {
     store.commit('SET_IS_SIGN_IN', false);
