@@ -71,7 +71,7 @@
         />
         <FailureAnimation
           v-if="isFailureAnimation"
-          key="Failure"
+          key="failure"
         />
       </transition-group>
     </div>

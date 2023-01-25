@@ -45,6 +45,7 @@
     </div>
     <div class="second-animation">
       <div class="second-text-animation-container">
+        <Fireworks/>
         <div class="second-text-animation">
           <template v-for="(text, index) in word">
             <span
@@ -75,8 +76,13 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import famousQuotes from '@/assets/famousQuote';
+import Fireworks from '@/components/Fireworks.vue';
 
-@Component
+@Component({
+  components: {
+    Fireworks,
+  },
+})
 export default class TaskSubmitAnimation extends Vue {
 private famousQuote = famousQuotes[Math.floor(Math.random() * famousQuotes.length)];
 
