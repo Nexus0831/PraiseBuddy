@@ -28,7 +28,10 @@
             :memo="item.memo"
             :term="item.term"
             :done="item.done"
-            :style="{'filter': !item.done && (new Date(item.term) < new Date()) ? 'grayscale(60%)' : ''}"
+            :style="{
+              'filter': !item.done && (new Date(item.term) < new Date()) ? 'sepia(60%)' : '',
+              'box-shadow': !item.done && (new Date(item.term) < new Date()) ? '0px 0px 20px 6px #FF9800 inset' : '',
+            }"
             @update-action="dialogEditOpen"
             v-if="isCheckedTaskSelect === item.done"
           />

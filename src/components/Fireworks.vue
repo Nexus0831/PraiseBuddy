@@ -1,15 +1,6 @@
 <template>
   <div id="fireworks">
     <template v-for="i of 6">
-<!--      <div-->
-<!--        class="c-firework"-->
-<!--        :key="i"-->
-<!--        :style="{-->
-<!--          top: `${Math.floor(Math.random() * (40 - 25) + 25)}%`,-->
-<!--          left: `${Math.floor(Math.random() * 100)}%`,-->
-<!--          animationDelay: `${(Math.random() * (5 - 3) + 3).toFixed(1)}s`-->
-<!--        }"-->
-<!--      ></div>-->
       <div
         class="c-firework"
         :key="i"
@@ -185,12 +176,12 @@ export default class Fireworks extends Vue {
 @keyframes fireworks-animation
   0%
     transform translate(-50%, 90vh)
-    width 4px
+    width 6px
     opacity 1
   50%
-    width 4px
+    width 6px
     opacity 1
   100%
-    width 600px
+    width 700px
     opacity 0
 </style>

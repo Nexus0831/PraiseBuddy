@@ -63,7 +63,7 @@ export default class ConfettiAnimation extends Vue {
 <style lang="stylus" scoped>
   .root
     position absolute
-    width 50%
+    width 600px
     height 100%
     overflow hidden
 
